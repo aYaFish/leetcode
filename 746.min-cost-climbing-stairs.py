@@ -7,19 +7,14 @@
 # @lc code=start
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        memo = {}
+        one_back, two_back = 0, 0
 
-        def dp(pos: int) -> int:
-            if pos < 2:
-                return 0
-            if pos not in memo:
-                memo[pos] = min(
-                    dp(pos - 1) + cost[pos - 1], dp(pos - 2) + cost[pos - 2]
-                )
+        for i in range(2, len(cost) + 1):
+            temp = min(one_back + cost[i - 1], two_back + cost[i - 2])
+            two_back = one_back
+            one_back = temp
 
-            return memo[pos]
-
-        return dp(len(cost))
+        return one_back
 
 
 # @lc code=end

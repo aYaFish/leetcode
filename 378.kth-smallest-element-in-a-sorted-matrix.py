@@ -14,16 +14,30 @@ class Solution:
         minHeap = []
 
         for j in range(N):
-            heapq.heappush(minHeap, (matrix[j][0], j, 0))
-        
+            heapq.heappush(minHeap, (matrix[0][j], 0, j))
+
         while k:
             val, row, col = heapq.heappop(minHeap)
-            if col+1 < N:
-                heapq.heappush(minHeap, (matrix[row][col+1], row, col+1))
+            if row + 1 < N:
+                heapq.heappush(minHeap, (matrix[row + 1][col], row + 1, col))
             k -= 1
-        
-        return val 
 
+        return val
+
+    # def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+    #     N = len(matrix)
+    #     minHeap = []
+
+    #     for j in range(N):
+    #         heapq.heappush(minHeap, (matrix[j][0], j, 0))
+    #
+    #     while k:
+    #         val, row, col = heapq.heappop(minHeap)
+    #         if col+1 < N:
+    #             heapq.heappush(minHeap, (matrix[row][col+1], row, col+1))
+    #         k -= 1
+    #
+    #     return val
 
     # def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
     #     self.matrix = matrix
@@ -44,7 +58,7 @@ class Solution:
 
     #     return left
 
-    #     
+    #
     # def countLessEqual(self, mid: int) -> Tuple[int, int, int]:
     #     row, col = self.N-1, 0
     #     more, less = self.matrix[self.N-1][self.N-1], self.matrix[0][0]
@@ -57,10 +71,8 @@ class Solution:
     #             less = max(less, self.matrix[row][col])
     #             count += row + 1
     #             col += 1
-    #     
+    #
     #     return (count, less, more)
 
 
-
 # @lc code=end
-
