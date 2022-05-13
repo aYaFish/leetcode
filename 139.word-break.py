@@ -19,14 +19,10 @@ class Solution:
                 curr = curr[letter]
             curr[END] = True
         
-        ret = [None] * N
+        @cache
         def backtracking(pos: int) -> bool:
-            nonlocal ret
             if pos == N:
                 return True
-            
-            if ret[pos] is not None:
-                return ret[pos]
             
             curr = trie
             for i in range(pos, N):
@@ -34,14 +30,11 @@ class Solution:
                     break
                 curr = curr[s[i]]
                 if curr[END] and backtracking(i + 1):
-                    ret[pos] = True
                     return True
 
-            ret[pos] = False
             return False
         
-        backtracking(0)
-        return ret[0] == True
+        return backtracking(0)
 
 
 # @lc code=end
